@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GetIpfsUrlFromPinata } from "../utils";
 import axios from "axios";
-import Marketplace from "../NFTMarket.json";  
+import Marketplace from "../NFTMarket.json";
 import { ProgressBar, RotatingLines } from "react-loader-spinner";
 
 export default function NFTPage({ id, setOpenWind }) {
@@ -146,7 +146,7 @@ export default function NFTPage({ id, setOpenWind }) {
             </div>
 
             <div className="text-center text-light mt-4 ">
-              {currAddress != data.owner && currAddress != data.seller ? (
+              {currAddress != data.owner || currAddress != data.seller ? (
                 <span
                   className="border p-2 "
                   onClick={() => buyNFT(id)}
