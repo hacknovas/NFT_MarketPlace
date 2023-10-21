@@ -14,7 +14,7 @@ export default function Footer() {
             <a class="navbar-brand" href="/">
               Blockchain Powered @AvtarNFT
             </a>
-            <div>Created by @Doni_Prathamesh</div>
+            <div>Created by @Hacknova</div>
           </div>
         </div>
         <div className="mb-2 container text-center">

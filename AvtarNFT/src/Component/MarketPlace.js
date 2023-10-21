@@ -19,7 +19,7 @@ export default function MarketPlace() {
       price: "0.03ETH",
       currentlySelling: "True",
       address: "0xe81Bf5A757CB4f7F82a2F23b1e59bE45c33c5b13",
-    }
+    },
   ];
 
   const [data, updateData] = useState(sampleData);
@@ -136,34 +136,34 @@ export default function MarketPlace() {
             />
           </div>
         ) : (
-          <div>
-            <div
-              className="text-center rounded mb-2 text-uppercase text-light p-3 "
-              style={{ boxShadow: "10px 2px 2px 2px white" }}
-            >
-              <h4>
-                <span className="">Listed NFTs</span>
-              </h4>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                alignItems: "center",
-                justifyContent: "space-around",
-              }}
-            >
-              {data.map((value, index) => {
-                return (
-                  <NFTTile
-                    data={value}
-                    key={index}
-                    wind={setOpenWind}
-                    setId={setId}
-                  />
-                );
-              })}
+          <div className="d-flex" style={{ justifyContent: "center" }}>
+            <div>
+              <div
+                className="text-center rounded mb-2 text-uppercase text-light p-3 w-100 "
+                style={{ boxShadow: "10px 2px 2px 2px white" }}
+              >
+                <h4 className="text-center">Listed NFTs</h4>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                  justifyContent: "space-around",
+                }}
+              >
+                {data.map((value, index) => {
+                  return (
+                    <NFTTile
+                      data={value}
+                      key={index}
+                      wind={setOpenWind}
+                      setId={setId}
+                    />
+                  );
+                })}
+              </div>
             </div>
           </div>
         )}

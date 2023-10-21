@@ -152,13 +152,13 @@ export default function NFTPage({ id, setOpenWind }) {
                   onClick={() => buyNFT(id)}
                   style={{ cursor: "pointer", backgroundColor: "#362955" }}
                 >
-                  {start ? <b>Buying...</b> : <b>Make it Yours</b>}
+                  {start ? <b>Buying...</b> : <b>Buy the NFT</b>}
                 </span>
               ) : (
                 <div>You are the owner of this NFT</div>
               )}
             </div>
-            <div className="text-center text-light mt-4">{"message"}</div>
+            {/* <div className="text-center text-light mt-4">{"message"}</div> */}
           </div>
         </main>
       )}

@@ -35,7 +35,7 @@ function NFTTile(prop) {
       onMouseLeave={handleMouseLeave}
     >
       <div>
-        {prop.edit ? (
+        {/* {prop.edit ? (
           <Link
             to={"/edit/" + prop.data.tokenId}
             className="text-dark d-block text-end"
@@ -45,7 +45,7 @@ function NFTTile(prop) {
           </Link>
         ) : (
           <></>
-        )}
+        )} */}
         <img
           src={IPFSUrl}
           alt="NA"
