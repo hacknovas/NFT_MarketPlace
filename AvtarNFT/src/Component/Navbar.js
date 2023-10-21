@@ -35,7 +35,7 @@ export default function Navbar() {
         <nav className="navbar shadow-sm ">
           <div className="container">
             <Link to="/" className="navbar-brand">
-              <b className="">AvtarNFT</b>
+              <b className="">NFTMarket</b>
             </Link>
             <div className="d-flex" role="search">
               <Link

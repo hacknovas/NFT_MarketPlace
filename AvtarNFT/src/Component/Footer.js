@@ -12,7 +12,7 @@ export default function Footer() {
         <div class="m-3 navbar  navbar-expand-lg navbar-light bg-grey">
           <div class="container">
             <a class="navbar-brand" href="/">
-              Blockchain Powered @AvtarNFT
+              Blockchain Powered @NFTMarket
             </a>
             <div>Created by @Hacknova</div>
           </div>
