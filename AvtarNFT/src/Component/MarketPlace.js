@@ -103,7 +103,7 @@ export default function MarketPlace() {
         <div>
           <h1>
             <b>Collect/Sell</b>
-            <br></br> Your Favourite <br /> Avtar
+            <br></br> Your Favourite <br /> Avtar and NFTs
           </h1>
           <div className="btn mt-3 btn-secondary">
             <Link
@@ -111,7 +111,7 @@ export default function MarketPlace() {
               className="text-light"
               style={{ textDecoration: "none" }}
             >
-              Upload Your Avtar
+              Create Your NFT
             </Link>
           </div>
         </div>

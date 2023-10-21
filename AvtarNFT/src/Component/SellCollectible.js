@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { uploadFileToIPFS, uploadJSONToIPFS } from "../../src/pinata";
+import { uploadFileToIPFS, uploadJSONToIPFS } from "../pinata";
 import Marketplace from "../NFTMarket.json";
-import { Bars, LineWave } from "react-loader-spinner";
+import { Bars, FallingLines, LineWave } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 const ethers = require("ethers");
 
-export default function SellNFT() {
+export default function SellCollectible() {
   const [load, setLoad] = useState(false);
   const [load1, setLoad1] = useState(false);
   const [fileImg, setFileImg] = useState();
@@ -19,32 +19,17 @@ export default function SellNFT() {
 
   const changeFile = async (e) => {
     setLoad(true);
-
-    const response = await fetch(
-      `https://api.dicebear.com/7.x/adventurer/svg?seed=${formPara.description}`
-    );
-    const svgData = await response.text();
-
-    // Convert SVG data to a Blob
-    const blob = new Blob([svgData], { type: "image/svg+xml" });
-
-    // Create a File object from the Blob
-    const fileName = `${formPara.description.substring(0, 4)}.svg`;
-    const fileX = new File([blob], fileName, { type: "image/svg+xml" });
-
-    setFileImg(
-      `https://api.dicebear.com/7.x/adventurer/svg?seed=${formPara.description}`
-    );
+    var file = e.target.files[0];
+    setFileImg(URL.createObjectURL(e.target.files[0]));
+    //check for file extension
 
     try {
-      const response = await uploadFileToIPFS(fileX);
+      const response = await uploadFileToIPFS(file);
 
       if (response.success === true) {
         console.log("Uploaded image to Pinata: ", response.pinataURL);
         setFileURL(response.pinataURL);
       }
-
-      console.log("uploaedde");
     } catch (e) {
       console.log("Error during file upload", e);
     }
@@ -56,7 +41,6 @@ export default function SellNFT() {
   async function uploadMetadataToIPFS() {
     const { name, description, price } = formPara;
     //Make sure that none of the fields are empty
-
     if (!name || !description || !price || !fileURL) {
       return -1;
     }
@@ -67,10 +51,10 @@ export default function SellNFT() {
       price,
       image: fileURL,
     };
+
     try {
       //upload the metadata JSON to IPFS
       const response = await uploadJSONToIPFS(nftJSON);
-
       if (response.success === true) {
         console.log("Uploaded JSON to Pinata: ", response);
         return response.pinataURL;
@@ -117,23 +101,22 @@ export default function SellNFT() {
       alert("Upload error" + e);
     }
     setLoad1(false);
-    setdisplayImage(false);
   };
 
   return (
     <>
       <Link
-        to="/sell1"
+        to="/sell"
         className="text-light badge p-3 border-bottom m-2 bg-secondary"
         style={{ textDecoration: "none" }}
       >
-        <div>Upload Collectibles</div>
+        <div>Create NFT Avtar</div>
       </Link>
 
       {/*  */}
       <div className="text-center m-3">
         <span className="shadow p-3" style={{ borderRadius: "10%" }}>
-          <b>Create Your NFT</b>
+          <b>Upload collectibles</b>
         </span>
       </div>
 
@@ -147,46 +130,36 @@ export default function SellNFT() {
               htmlFor="exampleFormControlInput1"
               className="text-uppercase form-label text-dark"
             >
-              Name for You NFT
+              Name
             </label>
             <input
               name="name"
               type="text"
               className="form-control"
               id="exampleFormControlInput1"
-              placeholder=""
               value={formPara.name}
               onChange={(e) =>
                 setformPara({ ...formPara, name: e.target.value })
               }
             />
           </div>
-          <label
-            htmlFor="exampleFormControlTextarea1"
-            className="text-uppercase text-dark form-label"
-          >
-            Describe your NFT
-          </label>
-          <div className="mb-3 d-flex">
+          <div className="mb-3">
+            <label
+              htmlFor="exampleFormControlTextarea1"
+              className="text-uppercase text-dark form-label"
+            >
+              Cool Facts
+            </label>
             <textarea
               name="Description"
               className="form-control"
               id="exampleFormControlTextarea1"
               rows="2"
               value={formPara.description}
-              onFocus={() => {
-                setdisplayImage(true);
-              }}
-              onChange={(e) => {
-                setformPara({ ...formPara, description: e.target.value });
-                setFileImg(
-                  `https://api.dicebear.com/7.x/adventurer/svg?seed=${formPara.description}`
-                );
-              }}
+              onChange={(e) =>
+                setformPara({ ...formPara, description: e.target.value })
+              }
             ></textarea>
-            <div onClick={changeFile} className="btn  border">
-              Generate NFT (once)
-            </div>
           </div>
           <div className="mb-3">
             <label
@@ -200,7 +173,7 @@ export default function SellNFT() {
               type="text"
               className="form-control"
               id="exampleFormControlInput1"
-              placeholder="Enter Price"
+              placeholder=""
               value={formPara.price}
               onChange={(e) =>
                 setformPara({ ...formPara, price: e.target.value })
@@ -208,6 +181,22 @@ export default function SellNFT() {
             />
           </div>
           <div className="d-flex">
+            <div className="mb-3">
+              <label
+                htmlFor="formFile"
+                className="text-dark text-uppercase form-label font-weight-bold"
+              >
+                Upload File
+              </label>
+              <input
+                name="ImageNFT"
+                className="form-control "
+                type="file"
+                id="formFile"
+                onChange={changeFile}
+              />
+            </div>
+
             {load ? (
               <div className="d-flex">
                 <LineWave
@@ -259,7 +248,6 @@ export default function SellNFT() {
               alt="Failting to preview...Upload another one."
               className="ml-3"
               height="410vh"
-              style={{ borderRadius: "50%", backgroundColor: "grey" }}
             ></img>
           </div>
         ) : (

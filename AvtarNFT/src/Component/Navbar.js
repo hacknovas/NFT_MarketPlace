@@ -42,7 +42,7 @@ export default function Navbar() {
                 to="/sell"
                 className="navbar-brand badge text-dark mt-2 shadow-sm"
               >
-                Sell NFT
+                Create/Sell NFT
               </Link>
               <button
                 className="btn shadow-sm"
