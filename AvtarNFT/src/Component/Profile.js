@@ -71,14 +71,14 @@ export default function Profile() {
   };
 
   useEffect(() => {
-    return () => {
+    // return () => {
       setOpenWind(false);
       setFetch(true);
       getMyNft();
-      setTimeout(() => {
+      // setTimeout(() => {
         setFetch(false);
-      }, 1500);
-    };
+      // }, 1500);
+    // };
   }, []);
 
   return (
